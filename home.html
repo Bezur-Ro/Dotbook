@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script>
+        setTimeout(() => {
+          var favicon_video_image_counter = 0;
+          var favicon_video_icon_tag = document.querySelector("link[rel='icon']");
+          var favicon_video_images = [
+      "https://favicongenerator.s3.amazonaws.com/3897a44ba8016.png","https://favicongenerator.s3.amazonaws.com/78fdd9f8919ad.png","https://favicongenerator.s3.amazonaws.com/f9500d7274a1d.png","https://favicongenerator.s3.amazonaws.com/e9fcd0d0a2896.png","https://favicongenerator.s3.amazonaws.com/0efae83cac7be.png","https://favicongenerator.s3.amazonaws.com/e062b40ec9fec.png","https://favicongenerator.s3.amazonaws.com/88486ecda08b1.png","https://favicongenerator.s3.amazonaws.com/0bbe64c729146.png","https://favicongenerator.s3.amazonaws.com/822c7403b47fe.png","https://favicongenerator.s3.amazonaws.com/9952642180601.png","https://favicongenerator.s3.amazonaws.com/173fb018835b4.png"];
+          async function favicon_video_to_data_url(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+              var reader = new FileReader();
+              reader.onloadend = function () {
+                callback(reader.result);
+              };
+              reader.readAsDataURL(xhr.response);
+            };
+            xhr.open("GET", url);
+            xhr.responseType = "blob";
+            xhr.send();
+          }
+      
+          var favicon_video_loaded_images = [];
+      
+          favicon_video_images.map((url, idx) => {
+            favicon_video_to_data_url(url, function (dataUrl) {
+              favicon_video_loaded_images[idx] = dataUrl;
+            });
+          });
+      
+          setInterval(function () {
+            if(favicon_video_loaded_images[favicon_video_image_counter]) {
+              favicon_video_icon_tag.href = favicon_video_loaded_images[
+                favicon_video_image_counter
+              ].replace("application/octet-stream", "image/png");
+            }
+            if (
+              favicon_video_image_counter ==
+              favicon_video_loaded_images.length - 1
+            )
+              favicon_video_image_counter = 0;
+            else favicon_video_image_counter++;
+          }, 100);
+        }, 2000);
+      </script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type='image/png' href="icons8-notes-app-192.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Notes app vanilla JS"/>
+    <link rel="apple-touch-icon" href="icons8-notes-app-192.png" />
+    <link rel="manifest" href="manifest.json" />
+    <title>Dot Book</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Zen+Maru+Gothic&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body style="background-image: url(R3.jpg); background-size: fit; background-position: center center">
+  		<article class="banner-image">
+	
+			</article>
+    <div class="notes" id="app">
+    </div>
+    <script src="./js/main.js" type="module">
+    </script>
+    <script>
+    if('serviceWorker' in navigator){
+            window.addEventListener('load',()=>{
+              navigator.serviceWorker.register('./serviceworker.js')
+              .then((reg)=>console.log('Success',reg.scope))
+              .catch((err)=>console.log('Failure',err))
+            })
+          }
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>
