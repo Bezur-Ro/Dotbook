@@ -7,7 +7,7 @@ export default class notesView {
     this.onNoteDelete = onNoteDelete;
     this.root.innerHTML = `
     <div class="notes-sidebar">
-<button onclick="window.location.href='https://drillview.herokuapp.com/';" class="Drill-view" type="button">Drill Book</button>
+<button onclick="window.location.href='https://drill-book.vercel.app/';" class="Drill-view" type="button">Drill Book</button>
 
         <button class="notes-add" type="button">Add Set</button>
 
